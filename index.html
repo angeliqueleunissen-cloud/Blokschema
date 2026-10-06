@@ -402,7 +402,7 @@ function applyExcelDataForCurrentPdf(){
 
   found.innerHTML=
     `<b>Excel gekoppeld:</b> ${escapeHtml(key)} — ${escapeHtml(addressText||"(geen adres)")}`;
-  status.textContent=`Excel gekoppeld aan ${key}. Materialen: kolom C t/m M.`;
+  status.textContent=`Excel gekoppeld aan ${key}. Materialen: kolom C t/m BI.`;
   return true;
 }
 
@@ -410,8 +410,8 @@ function drawExcelMaterials(){
   if(!currentExcelRow || currentPage!==1) return;
 
   const rows=[];
-  // Nieuwe Excel-opmaak: uitsluitend kolom C t/m M zijn materialen.
-  const materialHeaders=excelHeaders.slice(2,13);
+  // Nieuwe Excel-opmaak: uitsluitend kolom C t/m BI zijn materialen.
+  const materialHeaders=excelHeaders.slice(2,63);
   for(const header of materialHeaders){
     // Deze twee Excel-kolommen mogen niet in de materiaaltabel komen.
     // We vergelijken genormaliseerd zodat bijvoorbeeld "Bestaande WC",
@@ -536,8 +536,8 @@ excelFileInput.addEventListener("change",async()=>{
     }
 
     excelHeaders=raw[0].map(v=>String(v??"").trim());
-    if(excelHeaders.length < 13){
-      throw new Error("De nieuwe Excel moet minimaal kolom A t/m M bevatten.");
+    if(excelHeaders.length < 63){
+      throw new Error("De nieuwe Excel moet minimaal kolom A t/m BI bevatten.");
     }
     const nodeIndex=0;
     const addressIndex=1;
